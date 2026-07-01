@@ -16,3 +16,8 @@ export interface EncryptedVault {
     activeAccountIndex: number;
     createdAt: number
 }
+
+export interface TransactionResult {
+    signature: string;
+    status: 'confirmed' | 'failed';
+}
