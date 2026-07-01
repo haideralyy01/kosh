@@ -1,7 +1,7 @@
 import * as bip39 from 'bip39';
 import { derivePath } from 'ed25519-hd-key';
 import { Keypair } from '@solana/web3.js';
-import { WalletKeyPair } from '@/types/wallet'
+import type { WalletKeyPair } from '@/types/wallet'
 
 export const generateMnemonic = (wordCount: 12 | 24 = 12): string => {
   const strength = wordCount === 24 ? 256 : 128;
