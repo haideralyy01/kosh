@@ -21,3 +21,17 @@ export interface TransactionResult {
     signature: string;
     status: 'confirmed' | 'failed';
 }
+
+export interface WalletSession {
+    mnemonic: string;
+    keypair:WalletKeyPair;
+    activeAccount: WalletAccount
+}
+
+export type WalletStatus = 'uninitialized' | 'locked' | 'unlocked';
+
+export interface WalletState {
+  status: WalletStatus;
+  vault: EncryptedVault | null;
+  session: WalletSession | null;
+}
