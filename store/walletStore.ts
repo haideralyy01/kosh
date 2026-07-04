@@ -24,6 +24,8 @@ const initialState: WalletState = {
 export const useWalletStore = create<WalletState &  WalletActions>((set, get) => ({
     ...initialState,
     initialize: () => {
+        const { status } = get();
+        if (status === 'unlocked') return;
         if (vaultExists()) {
             const vault = loadVault();
             set({ status: 'locked', vault});
