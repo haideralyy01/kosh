@@ -21,15 +21,10 @@ export const WalletGuard = ({ children }: WalletGuardProps) => {
 
   React.useEffect(() => {
     if (checking) return;
-
-    if (status === 'uninitialized') {
-      router.replace('/');
-    }
-
-    if (status === 'locked') {
-      router.replace('/');
-    }
-  }, [status, checking, router]);
+    if (status === 'unlocked') return;
+    
+    router.replace('/');
+  }, [status, checking, router])
 
   if (checking) return <FullScreenSpinner />;
 
