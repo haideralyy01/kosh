@@ -5,23 +5,32 @@ interface SpinnerProps {
   className?: string;
 }
 
-const sizeMap = {
-  sm: 'w-4 h-4 border-2',
-  md: 'w-6 h-6 border-2',
-  lg: 'w-8 h-8 border-[3px]',
-};
-
 export const Spinner = ({ size = 'md', className }: SpinnerProps) => {
+  const wrapperSize = {
+    sm: 'w-16 h-6 scale-75',
+    md: 'w-24 h-8',
+    lg: 'w-32 h-10 scale-125',
+  };
+
   return (
     <div
       role="status"
       aria-label="Loading"
       className={cn(
-        'rounded-full border-wallet-border border-t-wallet-primary animate-spin',
-        sizeMap[size],
+        'relative flex items-center justify-center mt-4',
+        wrapperSize[size],
         className
       )}
-    />
+    >
+
+      <div className="absolute w-3 h-3 rounded-full bg-wallet-primary left-[15%] bottom-2 animate-[bounceBall_0.5s_alternate_infinite_ease]" />
+      <div className="absolute w-3 h-3 rounded-full bg-wallet-primary left-[45%] bottom-2 animate-[bounceBall_0.5s_alternate_infinite_ease] [animation-delay:0.2s]" />
+      <div className="absolute w-3 h-3 rounded-full bg-wallet-primary right-[15%] bottom-2 animate-[bounceBall_0.5s_alternate_infinite_ease] [animation-delay:0.3s]" />
+
+      <div className="absolute w-3 h-0.5 rounded-full bg-black/40 bottom-0 left-[15%] blur-[1px] animate-[bounceShadow_0.5s_alternate_infinite_ease]" />
+      <div className="absolute w-3 h-0.5 rounded-full bg-black/40 bottom-0 left-[45%] blur-[1px] animate-[bounceShadow_0.5s_alternate_infinite_ease] [animation-delay:0.2s]" />
+      <div className="absolute w-3 h-0.5 rounded-full bg-black/40 bottom-0 right-[15%] blur-[1px] animate-[bounceShadow_0.5s_alternate_infinite_ease] [animation-delay:0.3s]" />
+    </div>
   );
 };
 

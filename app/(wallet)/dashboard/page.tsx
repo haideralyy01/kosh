@@ -11,7 +11,6 @@ import {
 import { useWallet } from '@/hooks/useWallet';
 import { useBalance } from '@/hooks/useBalance';
 import { CopyButton } from '@/components/ui/CopyButton';
-import { Spinner } from '@/components/ui/Spinner';
 import {
   pageVariants,
   buttonTap,
@@ -137,20 +136,29 @@ export default function DashboardPage() {
               <span className="text-xs text-wallet-dim uppercase tracking-wider">
                 Total balance
               </span>
+              
               {loading && balance === null ? (
-                <Spinner size="md" />
-              ) : (
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-4xl font-semibold text-wallet-text tracking-tight">
-                    {balance !== null ? balance.toFixed(4) : '—'}
-                  </span>
-                  <span className="text-lg text-wallet-muted">SOL</span>
+                <div className="flex flex-col gap-3 mt-1">
+                  <div className="flex items-baseline gap-2">
+                    <div className="h-10 w-32 bg-wallet-border rounded-lg animate-pulse" />
+                    <div className="h-5 w-10 bg-wallet-border/50 rounded animate-pulse" />
+                  </div>
+                  <div className="h-4 w-24 bg-wallet-border/40 rounded mt-0.5 animate-pulse" />
                 </div>
-              )}
-              {balance !== null && (
-                <span className="text-sm text-wallet-muted">
-                  ≈ ${(balance * 148).toFixed(2)} USD
-                </span>
+              ) : (
+                <>
+                  <div className="flex items-baseline gap-2 mt-1">
+                    <span className="text-4xl font-semibold text-wallet-text tracking-tight">
+                      {balance !== null ? balance.toFixed(4) : '—'}
+                    </span>
+                    <span className="text-lg text-wallet-muted">SOL</span>
+                  </div>
+                  {balance !== null && (
+                    <span className="text-sm text-wallet-muted">
+                      ≈ ${(balance * 148).toFixed(2)} USD
+                    </span>
+                  )}
+                </>
               )}
             </motion.div>
 
