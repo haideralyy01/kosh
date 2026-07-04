@@ -8,6 +8,7 @@ import {
     sendAndConfirmTransaction
 } from '@solana/web3.js'
 import type { TransactionResult } from '@/types/wallet';
+import { promise } from 'zod';
 
 const RPC_URL = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'https://api.devnet.solana.com';
 
@@ -48,6 +49,25 @@ export const sendSOL = async (
         return {signature, status: 'confirmed'};
     } catch {
         throw new Error('transection failed');
+    }
+};
+
+export const getTransactionHistory = async (publicKey: string) => {
+    try {
+        const connection = getConnection();
+        const pubkey = new PublicKey(publicKey);
+
+        const signature = await connection.getSignaturesForAddress(pubkey, { limit: 10, });
+
+        const transaction = await Promise.all(
+            signature.map(async (sig) => {
+                const tx = await connection.getParsedTransaction(sig.signature, { maxSupportedTransactionVersion: 0, });
+                return { sig, tx };
+            })
+        );
+        return transaction
+    } catch {
+        throw new Error('Failed to fetch transactions');
     }
 };
 
