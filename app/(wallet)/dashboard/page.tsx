@@ -1,13 +1,15 @@
 'use client';
 
 import * as React from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ArrowUp, ArrowDown, RefreshCw } from 'lucide-react';
 
 import { useWallet } from '@/hooks/useWallet';
 import { useBalance } from '@/hooks/useBalance';
+import { useTransactions } from '@/hooks/useTransactions';
+import { TransactionList } from '@/components/TransactionList';
+
 import {
   pageVariants,
   buttonTap,
@@ -19,6 +21,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const { publicKey } = useWallet();
   const { balance, loading, refresh: refreshBalance } = useBalance();
+  const { transactions, loading: txLoading, error: txError } = useTransactions();
 
   if (!publicKey) return null;
 
@@ -135,31 +138,14 @@ export default function DashboardPage() {
             <span className="text-sm font-medium text-wallet-text">
               Recent activity
             </span>
-            <span className="text-xs text-wallet-dim">Last 30 days</span>
+            <span className="text-xs text-wallet-dim">Last 10 transactions</span>
           </div>
-
-          <motion.div
-            variants={listItemVariants}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-col items-center justify-center py-16 bg-wallet-surface border border-wallet-border rounded-2xl gap-3"
-          >
-            <div className="w-10 h-10 rounded-xl bg-wallet-card border border-wallet-border flex items-center justify-center">
-              <Image
-              src="/logo.png"
-              alt="Kosh"
-              width={28}
-              height={28}
-              className="object-contain opacity-40"
+            <TransactionList
+              transactions={transactions}
+              loading={txLoading}
+              error={txError}
             />
-            </div>
-            <p className="text-sm text-wallet-muted">No transactions yet</p>
-            <p className="text-xs text-wallet-dim">
-              Send or receive SOL to get started
-            </p>
-          </motion.div>
         </div>
-
       </div>
     </motion.div>
   );
