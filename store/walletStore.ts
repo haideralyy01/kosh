@@ -11,8 +11,8 @@ interface WalletActions {
     unlock: (password: string) => Promise<void>;
     lock: () => void;
     resetWallet: () => void;
-    addAccount: (password: string) => Promise<void>;
-    switchAccount: (index: number, password: string) => Promise<void>;
+    addAccount: () => Promise<void>;
+    switchAccount: (index: number) => Promise<void>;
 };
 
 const initialState: WalletState = {
@@ -106,7 +106,7 @@ export const useWalletStore = create<WalletState &  WalletActions>((set, get) =>
         set(initialState);
     },
 
-    addAccount: async (password) => {
+    addAccount: async () => {
         const { vault, session } = get();
         if (!vault || !session) throw new Error('Wallet not unlocked');
 
@@ -128,7 +128,7 @@ export const useWalletStore = create<WalletState &  WalletActions>((set, get) =>
         set({ vault: updateVault });
     },
 
-    switchAccount: async (index, password) => {
+    switchAccount: async (index) => {
         const { vault, session } = get();
         if (!vault || !session) throw new Error('Wallet not unlocked');
 
