@@ -1,9 +1,10 @@
 'use client';
 
 import * as React from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { ArrowUp, ArrowDown, Wallet, RefreshCw } from 'lucide-react';
+import { ArrowUp, ArrowDown, RefreshCw } from 'lucide-react';
 
 import { useWallet } from '@/hooks/useWallet';
 import { useBalance } from '@/hooks/useBalance';
@@ -144,7 +145,13 @@ export default function DashboardPage() {
             className="flex flex-col items-center justify-center py-16 bg-wallet-surface border border-wallet-border rounded-2xl gap-3"
           >
             <div className="w-10 h-10 rounded-xl bg-wallet-card border border-wallet-border flex items-center justify-center">
-              <Wallet className="w-5 h-5 text-wallet-dim" />
+              <Image
+              src="/logo.png"
+              alt="Kosh"
+              width={28}
+              height={28}
+              className="object-contain opacity-40"
+            />
             </div>
             <p className="text-sm text-wallet-muted">No transactions yet</p>
             <p className="text-xs text-wallet-dim">

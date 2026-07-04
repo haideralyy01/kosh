@@ -2,8 +2,9 @@
 
 import { useRouter, usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import {
-  Wallet,
+  LayoutDashboard,
   ArrowUp,
   ArrowDown,
   Settings,
@@ -16,10 +17,10 @@ import { CopyButton } from '@/components/ui/CopyButton';
 import { buttonTap } from '@/lib/animations';
 
 const navItems = [
-  { label: 'Dashboard', icon: Wallet,    path: '/dashboard' },
-  { label: 'Send',      icon: ArrowUp,   path: '/send'      },
-  { label: 'Receive',   icon: ArrowDown, path: '/receive'   },
-  { label: 'Settings',  icon: Settings,  path: '/settings'  },
+  { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
+  { label: 'Send',      icon: ArrowUp,         path: '/send'      },
+  { label: 'Receive',   icon: ArrowDown,       path: '/receive'   },
+  { label: 'Settings',  icon: Settings,        path: '/settings'  },
 ];
 
 export const Sidebar = () => {
@@ -38,10 +39,15 @@ export const Sidebar = () => {
 
       <div className="flex flex-col gap-8">
 
+        {/* logo */}
         <div className="flex items-center gap-2.5 px-2">
-          <div className="w-8 h-8 rounded-lg bg-wallet-primary/20 border border-wallet-primary/30 flex items-center justify-center">
-            <Wallet className="w-4 h-4 text-wallet-primary" />
-          </div>
+          <Image
+            src="/logo.png"
+            alt="Kosh"
+            width={32}
+            height={32}
+            className="object-contain"
+          />
           <span className="text-sm font-semibold text-wallet-text">Kosh</span>
         </div>
 
@@ -59,7 +65,7 @@ export const Sidebar = () => {
             <div className="px-4 mt-0.5">
               <CopyButton text={publicKey} label="Address" />
             </div>
-            <div className="border-t border-wallet-border mt-2 pt-2 px-0">
+            <div className="border-t border-wallet-border mt-2 pt-2">
               <span className="text-xs text-wallet-dim">Balance</span>
               <p className="text-sm font-semibold text-wallet-text mt-0.5">
                 {balance !== null ? balance.toFixed(4) : '—'}

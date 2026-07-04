@@ -9,6 +9,9 @@ const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 export const metadata: Metadata = {
   title: "Kosh | Web-Based Crypto Wallet",
   description: "A secure, non-custodial web wallet for managing your digital assets and interacting with the  blockchain.",
+  icons: {
+    icon: '/logo.png',   // ← tab favicon
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

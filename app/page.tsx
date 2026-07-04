@@ -7,7 +7,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { Wallet, ArrowRight } from 'lucide-react';
+
+import { ArrowRight } from 'lucide-react';
 
 import { useWallet } from '@/hooks/useWallet';
 import { PasswordInput } from '@/components/ui/PasswordInput';
@@ -80,9 +81,11 @@ export default function LandingPage() {
             className="w-full max-w-sm flex flex-col items-center gap-8"
           >
             <div className="flex flex-col items-center gap-3">
-              <div className="w-16 h-16 rounded-2xl bg-wallet-surface border border-wallet-border flex items-center justify-center">
-                <Wallet className="w-8 h-8 text-wallet-primary" />
-              </div>
+              <img
+                src="/logo.png"
+                alt="Kosh"
+                className="w-8 h-8 object-contain"
+              />
               <h1 className="text-2xl font-semibold text-wallet-text">
                 Kosh
               </h1>
@@ -122,9 +125,11 @@ export default function LandingPage() {
             className="w-full max-w-sm flex flex-col items-center gap-8"
           >
             <div className="flex flex-col items-center gap-3">
-              <div className="w-16 h-16 rounded-2xl bg-wallet-surface border border-wallet-border flex items-center justify-center">
-                <Wallet className="w-8 h-8 text-wallet-primary" />
-              </div>
+              <img
+                src="/logo.png"
+                alt="Kosh"
+                className="w-8 h-8 object-contain"
+              />
               <h1 className="text-2xl font-semibold text-wallet-text">
                 Welcome back
               </h1>
