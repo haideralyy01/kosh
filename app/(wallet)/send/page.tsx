@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { ArrowLeft, ArrowUp, Wallet } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 
 import { useWallet } from '@/hooks/useWallet';
 import { useBalance } from '@/hooks/useBalance';
@@ -67,36 +67,6 @@ export default function SendPage() {
       exit="exit"
       className="min-h-screen bg-wallet-bg flex"
     >
-
-      <aside className="w-60 shrink-0 border-r border-wallet-border flex flex-col justify-between py-6 px-4 glass-strong sticky top-0 h-screen">
-        <div className="flex flex-col gap-8">
-
-          <div className="flex items-center gap-2.5 px-2">
-            <div className="w-8 h-8 rounded-lg bg-wallet-primary/20 border border-wallet-primary/30 flex items-center justify-center">
-              <Wallet className="w-4 h-4 text-wallet-primary" />
-            </div>
-            <span className="text-sm font-semibold text-wallet-text">Kosh</span>
-          </div>
-
-          <div className="flex flex-col gap-1 bg-wallet-surface border border-wallet-border rounded-xl p-3">
-            <span className="text-xs text-wallet-dim">Available balance</span>
-            <span className="text-lg font-semibold text-wallet-text">
-              {balance !== null ? balance.toFixed(4) : '—'}
-              <span className="text-sm text-wallet-muted ml-1">SOL</span>
-            </span>
-          </div>
-
-        </div>
-
-        <motion.button
-          {...buttonTap}
-          onClick={() => router.push('/dashboard')}
-          className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm text-wallet-muted hover:text-wallet-text hover:bg-wallet-surface transition-all border border-transparent"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to dashboard
-        </motion.button>
-      </aside>
 
       <main className="flex-1 p-8 flex items-start justify-center">
         <div className="w-full max-w-lg flex flex-col gap-6">

@@ -1,20 +1,15 @@
 'use client';
 
 import * as React from 'react';
-import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { QRCodeSVG } from 'qrcode.react';
-import { ArrowLeft, Wallet, Download } from 'lucide-react';
 
 import { useWallet } from '@/hooks/useWallet';
-import { useBalance } from '@/hooks/useBalance';
 import { CopyButton } from '@/components/ui/CopyButton';
 import { pageVariants, cardVariants, buttonTap } from '@/lib/animations';
 
 export default function ReceivePage() {
-  const router = useRouter();
   const { publicKey, activeAccount } = useWallet();
-  const { balance } = useBalance();
 
   if (!publicKey) return null;
 
@@ -26,40 +21,6 @@ export default function ReceivePage() {
       exit="exit"
       className="min-h-screen bg-wallet-bg flex"
     >
-
-      <aside className="w-60 shrink-0 border-r border-wallet-border flex flex-col justify-between py-6 px-4 glass-strong sticky top-0 h-screen">
-        <div className="flex flex-col gap-8">
-
-          <div className="flex items-center gap-2.5 px-2">
-            <div className="w-8 h-8 rounded-lg bg-wallet-primary/20 border border-wallet-primary/30 flex items-center justify-center">
-              <Wallet className="w-4 h-4 text-wallet-primary" />
-            </div>
-            <span className="text-sm font-semibold text-wallet-text">Kosh</span>
-          </div>
-
-          <div className="flex flex-col gap-1 bg-wallet-surface border border-wallet-border rounded-xl p-3">
-            <span className="text-xs text-wallet-dim">Account</span>
-            <span className="text-sm font-medium text-wallet-text">
-              {activeAccount?.name ?? 'Account 1'}
-            </span>
-            <span className="text-xs text-wallet-dim mt-1">Balance</span>
-            <span className="text-sm font-semibold text-wallet-text">
-              {balance !== null ? balance.toFixed(4) : '—'}
-              <span className="text-xs text-wallet-muted ml-1">SOL</span>
-            </span>
-          </div>
-
-        </div>
-
-        <motion.button
-          {...buttonTap}
-          onClick={() => router.push('/dashboard')}
-          className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm text-wallet-muted hover:text-wallet-text hover:bg-wallet-surface transition-all border border-transparent"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to dashboard
-        </motion.button>
-      </aside>
 
       <main className="flex-1 p-8 flex items-start justify-center">
         <div className="w-full max-w-lg flex flex-col gap-6">
